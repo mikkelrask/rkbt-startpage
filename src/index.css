@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -66,4 +70,236 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital@0;1&family=Space+Mono:wght@700&display=swap');
+
+
+:root,
+:root.guts {
+  --background-color: #fff;
+  --header-color: #14143f;
+  --status-color: #14143f;
+  --title-color: #14143f;
+  --link-color: #14143f;
+  --hover-color: #1C1C1Cff;
+  --image: url("/img/Grafikforside.png")
+}
+
+:root.pastel {
+  --background-color: #CEC7C7;
+  --header-color: #47A4DA;
+  --status-color: #151241;
+  --title-color: #151241;
+  --link-color: #151241;
+  --hover-color: #1A1A39;
+  --image: url("/img/pos.webp")
+}
+
+:root.griffith {
+  --background-color: #809592;
+  --header-color: #353636ff;
+  --status-color: #F0F0F0ff;
+  --title-color: #353636ff;
+  --link-color: #F0F0F0ff;
+  --hover-color: #353636ff;
+  --image: url("/img/rack.webp")
+}
+
+:root.gold {
+  --background-color: #18122B;
+  --header-color: #D99433;
+  --status-color: #EDF0E8;
+  --title-color: #D99433;
+  --link-color: #EDF0E8;
+  --hover-color: #433F57;
+  --image: url("/img/pos.webp")
+}
+
+:root.sexy {
+  --image: url("/img/sexy.webp");
+  --background-color: #EFEF8D;
+  --header-color: #449FDB;
+  --status-color: #15133F;
+  --title-color: #FE93F4;
+  --link-color: #15133F;
+  --hover-color: #C0DBEA;
+}
+
+:root.wms {
+  --image: url("/img/wms.webp");
+  --background-color: #CCCFB0;
+  --header-color: #251D5B;
+  --status-color: #15133F;
+  --title-color: #251D5B;
+  --link-color: #251D5B;
+  --hover-color: #15133F;
+}
+
+:root.rack {
+  --image: url("/img/rack.webp");
+  --background-color: #819394;
+  --header-color: #251D5B;
+  --status-color: #15133F;
+  --title-color: #251D5B;
+  --link-color: #251D5B;
+  --hover-color: #15133F;
+  --svg-color: #EFED89;
+}
+
+:root.rocket {
+  --image: url("/img/rocket.webp");
+  --background-color: #fff;
+  --header-color: #645FAD;
+  --status-color: #13133C;
+  --title-color: #13133C;
+  --link-color: #13133C;
+  --hover-color: #645FAD;
+}
+
+:root.SCM {
+  --image: url("/img/SCM.webp");
+  --background-color: rgba(0, 0, 0, 0);
+  --background-gradient: linear-gradient(90deg, rgba(68, 159, 217, 1) 0%, rgba(213, 199, 201, 1) 100%);
+  --header-color: #14143f;
+  --status-color: #14143f;
+  --title-color: #14143f;
+  --link-color: #14143f;
+  --hover-color: #1C1C1Cff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  gap: 20px;
+  height: 100vh;
+  width: 100%;
+  background: var(--background-gradient);
+  background-color: var(--background-color);
+  color: var(--header-color);
+}
+
+
+.updated {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-family: 'Overpass', sans-serif;
+  font-size: 0.8rem;
+  margin-right: 2%;
+}
+
+.content-container {
+  margin-top: 6%;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.image-container {
+  height: 100%;
+  max-width: 40vw;
+  display: grid;
+  place-items: 50%;
+}
+
+.image-container img {
+  width: 60%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.header-container {
+  text-align: center;
+}
+
+h1 {
+  color: var(--header-color);
+  font-family: 'Space Mono', monospace;
+  font-size: 5rem;
+  margin-right: 14vh;
+}
+
+h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: -93rem;
+  font-weight: regular;
+}
+
+.status-strip {
+  margin-right: 14vh;
+  margin-top: 1vh;
+  margin-bottom: 8vh;
+  color: var(--status-color);
+  font-family: 'Overpass', sans-serif;
+  font-size: 1.5rem;
+}
+
+span {
+  margin-left: 2vh;
+}
+
+.card-container {
+  height: 25vh;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2%;
+  width: auto;
+  height: 30vh;
+  text-align: center;
+}
+
+
+
+.title {
+  margin-top: 2vh;
+  font-family: 'Space Mono', monospace;
+  color: var(--title-color);
+  font-size: 1.3rem;
+}
+
+.title svg {
+  color: var(--svg-color);
+}
+
+a {
+  font-family: 'Overpass', sans-serif;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: var(--link-color);
+  margin-top: 2vh;
+}
+
+a:hover {
+
+  color: var(--hover-color);
+}
+
+.links a {
+  display: block;
+  min-height: 55px;
+}
+
+img {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: end;
+  width: 60vh;
+  height: 60vh;
+  margin-right: 15vh;
+  content: var(--image);
+}
+
+.grow {
+  transition: all .2s ease-in-out;
 }

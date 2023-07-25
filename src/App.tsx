@@ -1,29 +1,22 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import bigImage from './components/bigImage/index.tsx'
+import BigImage from './components/bigImage/index.tsx'
+import UpdatedAt from './components/updatedAt/index.tsx'
+import HeaderContainer from './components/HeaderContainer/index.tsx'
+import ContentContainer from './components/ContentContainer/index.tsx'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
+      <UpdatedAt text="Opdateret d. " date={new Date().toString()} />
       <div>
+        <BigImage />
+      </div>
+      <HeaderContainer />
+      <div className="content-container">
         
-        <a href="https://react.dev" target="_blank">
-          <bigImage />
-        </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is: {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
