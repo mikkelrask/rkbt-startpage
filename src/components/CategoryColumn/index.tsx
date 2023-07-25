@@ -1,20 +1,50 @@
+// Categories.tsx
+import React, { useEffect, useState } from "react";
 
+const endpoint = "/api/categories";
+const apiBaseUrl = "http://localhost:3001";
+const apiUrl = `${apiBaseUrl}${endpoint}`;
 
-const CategoryColumn = () => {
-    return (
-        <>
-            <div className="header-container">
-                <h1>Velkommen hjem</h1>
-                <div className="status-strip">
-                    <span className="date"></span>
-                    <span> | </span>
-                    <span className="time"></span>
-                    <span> | </span>
-                    <span className="weather"></span>
-                </div>
-            </div>
-        </>
-    )
+interface Category {
+  id: number;
+  name: string;
 }
 
-export default CategoryColumn;
+const Categories: React.FC = () => {
+  // State to store the categories data
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  // Fetch categories from the API
+  useEffect(() => {
+    const fetchCategories = () => {
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch categories.");
+          }
+          return response.json();
+        })
+        .then((data: Category[]) => {
+          console.log(data);
+          setCategories(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
+    fetchCategories();
+  }, []);
+
+  return (
+    <div>
+      <ul>
+        {categories.map((category) => (
+          <li key={category.id}>{category.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default Categories;
