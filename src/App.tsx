@@ -1,9 +1,8 @@
-import { useState } from 'react'
 import BigImage from './components/bigImage/index.tsx'
 import UpdatedAt from './components/updatedAt/index.tsx'
 import HeaderContainer from './components/HeaderContainer/index.tsx'
-import ContentContainer from './components/ContentContainer/index.tsx'
 import './App.css'
+
 
 function App() {
 

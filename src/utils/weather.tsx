@@ -1,4 +1,3 @@
-import config from './config/config.js';
 
 const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${config.LAT}&lon=${config.LON}&appid=${config.TOKEN}`
 

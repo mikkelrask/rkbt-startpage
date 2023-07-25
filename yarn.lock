@@ -297,6 +297,25 @@
     "@swc/core-win32-ia32-msvc" "1.3.69"
     "@swc/core-win32-x64-msvc" "1.3.69"
 
+"@tolgee/core@5.10.1":
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/@tolgee/core/-/core-5.10.1.tgz#7df7f5da21eaf97e26bf85ec68c6f90c799165dd"
+  integrity sha512-4mrP0JpNl/MPP2zXi3WAW4EfKdNEuFV0ufEsnBAdV3Qhj02VqY/n/SPjUFT2qBTczwFJVCTlp17RDK2WZI+kaQ==
+
+"@tolgee/react@^5.10.1":
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/@tolgee/react/-/react-5.10.1.tgz#73a5556273056dca6230da59c40fa441a9136c7a"
+  integrity sha512-UN81hmrhoktLhVy8EyO423x4vNi36z6kW+e/op3zTV9ga87N3adCIKIYNzpsUnXJIwLuqj0ZuE8u/y+ELpEkxw==
+  dependencies:
+    "@tolgee/web" "5.10.1"
+
+"@tolgee/web@5.10.1":
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/@tolgee/web/-/web-5.10.1.tgz#cbbe720e0087dfd6af8f59f87b14b17f28e88043"
+  integrity sha512-0xAYH0OZ4cNcssVfp+4TqKMI8GWpNNNnVYALT54nRg0kEpEMTEZItGp1wNe1WlqaAPTSVjYujKBZ8ZUsasAIRg==
+  dependencies:
+    "@tolgee/core" "5.10.1"
+
 "@types/json-schema@^7.0.9":
   version "7.0.12"
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.12.tgz"
@@ -645,6 +664,11 @@ doctrine@^3.0.0:
   integrity sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==
   dependencies:
     esutils "^2.0.2"
+
+dotenv@^16.3.1:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.3.1.tgz#369034de7d7e5b120972693352a3bf112172cc3e"
+  integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==
 
 electron-to-chromium@^1.4.431:
   version "1.4.464"

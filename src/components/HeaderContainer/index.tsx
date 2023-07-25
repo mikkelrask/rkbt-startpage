@@ -1,5 +1,3 @@
-import { GetWeatherData } from './utils/weather.tsx'
-
 
 
 const HeaderContainer = () => {
