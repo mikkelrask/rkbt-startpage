@@ -304,3 +304,7 @@ img {
 .grow {
   transition: all .2s ease-in-out;
 }
+
+span  {
+  margin-right:8px;
+}

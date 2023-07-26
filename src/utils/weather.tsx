@@ -3,17 +3,19 @@ const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${config.LAT}&l
 
 const GetWeatherData = async () => {
     
-  try {
-    const response = await fetch(URL);
-    const data = await response.json();
-    console.log(data);
-    console.log(response);
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-    return (data.weather);
-  } catch (e) {
-    console.error('Failed to fetch weather data. See response', e);
-    return null;
-    }
+async function name(params:type) {
+    try {
+      const response = await fetch(URL);
+      const data = await response.json();
+      console.log(data.weather[0].main);
+      console.log(response);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      return (data.weather[0].main);
+    } catch (e) {
+      console.error('Failed to fetch weather data. See response', e);
+      return null;
+      }
+}
   }
  
 GetWeatherData();
