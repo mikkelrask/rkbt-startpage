@@ -12,7 +12,9 @@ function App() {
         <BigImage />
       </div>
       <HeaderContainer />
-      <Categories />
+      <div className="card-container">
+        <Categories />
+      </div>
     </>
   );
 }
