@@ -66,7 +66,7 @@ const Categories: React.FC = () => {
   };
 
   return (
-    <div>
+    <>
       {categories.map((category) => (
         <div key={category.id} className="categories">
           <h2 className="title">
@@ -82,7 +82,7 @@ const Categories: React.FC = () => {
           </ul>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
