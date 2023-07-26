@@ -1,27 +1,25 @@
-// Categories.tsx
 import React, { useEffect, useState } from "react";
 import Link from "../Link";
 
-const categories = "/api/categories";
-const links = "/api/links";
+const categoriesUrl = "/api/categories";
+const linksUrl = "/api/links";
 const apiBaseUrl = "http://localhost:3001";
-const apiUrl = `${apiBaseUrl}${categories}`;
+const categoriesApiUrl = `${apiBaseUrl}${categoriesUrl}`;
+const linksApiUrl = `${apiBaseUrl}${linksUrl}`;
 
 interface Category {
   id: number;
   name: string;
-  icon: string; // Add the 'icon' property for storing the Font Awesome icon name
-  links: Array<{ id: number; title: string; url: string }>; // Assuming the link structure
+  icon: string;
+  links: Array<{ id: number; title: string; url: string }>;
 }
 
 const Categories: React.FC = () => {
-  // State to store the categories data
   const [categories, setCategories] = useState<Category[]>([]);
 
-  // Fetch categories from the API
   useEffect(() => {
     const fetchCategories = () => {
-      fetch(apiUrl)
+      fetch(categoriesApiUrl)
         .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to fetch categories.");
@@ -31,37 +29,61 @@ const Categories: React.FC = () => {
         .then((data: Category[]) => {
           console.log(data);
           setCategories(data);
+
+          // Fetch links for each category
+          data.forEach((category) => {
+            fetchLinksForCategory(category.id);
+          });
         })
         .catch((error) => {
           console.error(error);
         });
+      console.log(categories)
     };
 
     fetchCategories();
   }, []);
 
+  const fetchLinksForCategory = (categoryId: number) => {
+    fetch(`${linksApiUrl}?categoryId=${categoryId}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch links for category.");
+        }
+        return response.json();
+      })
+      .then((data: Array<{ id: number; title: string; url: string }>) => {
+        // Find the category in the state and update its links with the fetched data
+        setCategories((prevCategories) =>
+          prevCategories.map((category) =>
+            category.id === categoryId ? { ...category, links: data } : category
+          )
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div>
       {categories.map((category) => (
-        <div key={category.id} className="container">
+        <div key={category.id} className="categories">
           <h2 className="title">
             <i className={category.icon}></i>
             {category.name}
           </h2>
           <ul>
-            {category.links?.map(
-              (
-                link // Add the nullish coalescing operator here
-              ) => (
-                <li class="title" key={link.id}>
-                  <Link url={link.url} title={link.title} />
-                </li>
-              )
-            )}
+            {category.links?.map((link) => (
+              <li className="title" key={link.id}>
+                <Link url={link.url} title={link.title} />
+              </li>
+            ))}
           </ul>
         </div>
       ))}
     </div>
   );
 };
+
 export default Categories;
