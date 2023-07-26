@@ -10,7 +10,7 @@ const todaysDate = new Date().toString();
 
 const UpdatedAt: FC<Props> = ({ text, date }) => {
     return (
-        <div className="updatedAt">
+        <div className="updated">
             <span>{text}</span>
             <span>{todaysDate}</span>
         </div>
