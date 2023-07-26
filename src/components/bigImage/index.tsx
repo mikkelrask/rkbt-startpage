@@ -20,7 +20,7 @@ const BigImage = () => {
   return (
     <>
       <div className="image-container">
-        <img src="../../../src/assets/Grafikforside.png" alt="Click Me" onClick={setTheme} />
+        <img src="/src/assets/Grafikforside.png" alt="Click Me" onClick={setTheme} />
       </div>
     </>
   );
