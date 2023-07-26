@@ -83,7 +83,7 @@ button:focus-visible {
   --title-color: #14143f;
   --link-color: #14143f;
   --hover-color: #1C1C1Cff;
-  --image: url("/img/Grafikforside.png")
+  --image: url("/src/assets/Grafikforside.png")
 }
 
 :root.pastel {
@@ -93,7 +93,7 @@ button:focus-visible {
   --title-color: #151241;
   --link-color: #151241;
   --hover-color: #1A1A39;
-  --image: url("/img/pos.webp")
+  --image: url("/src/assets/pos.webp")
 }
 
 :root.griffith {
@@ -103,7 +103,7 @@ button:focus-visible {
   --title-color: #353636ff;
   --link-color: #F0F0F0ff;
   --hover-color: #353636ff;
-  --image: url("/img/rack.webp")
+  --image: url("/src/assets/rack.webp")
 }
 
 :root.gold {
@@ -113,11 +113,11 @@ button:focus-visible {
   --title-color: #D99433;
   --link-color: #EDF0E8;
   --hover-color: #433F57;
-  --image: url("/img/pos.webp")
+  --image: url("/src/assets/pos.webp")
 }
 
 :root.sexy {
-  --image: url("/img/sexy.webp");
+  --image: url("/src/assets/sexy.webp");
   --background-color: #EFEF8D;
   --header-color: #449FDB;
   --status-color: #15133F;
@@ -127,7 +127,7 @@ button:focus-visible {
 }
 
 :root.wms {
-  --image: url("/img/wms.webp");
+  --image: url("/src/assets/wms.webp");
   --background-color: #CCCFB0;
   --header-color: #251D5B;
   --status-color: #15133F;
@@ -137,7 +137,7 @@ button:focus-visible {
 }
 
 :root.rack {
-  --image: url("/img/rack.webp");
+  --image: url("/src/assets/rack.webp");
   --background-color: #819394;
   --header-color: #251D5B;
   --status-color: #15133F;
@@ -148,7 +148,7 @@ button:focus-visible {
 }
 
 :root.rocket {
-  --image: url("/img/rocket.webp");
+  --image: url("/src/assets/rocket.webp");
   --background-color: #fff;
   --header-color: #645FAD;
   --status-color: #13133C;
@@ -158,7 +158,7 @@ button:focus-visible {
 }
 
 :root.SCM {
-  --image: url("/img/SCM.webp");
+  --image: url("/src/assets/SCM.webp");
   --background-color: rgba(0, 0, 0, 0);
   --background-gradient: linear-gradient(90deg, rgba(68, 159, 217, 1) 0%, rgba(213, 199, 201, 1) 100%);
   --header-color: #14143f;
