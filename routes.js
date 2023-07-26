@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Define your API endpoints here
 router.get("/categories", (req, res) => {
-  const q = `SELECT name FROM categories`;
+  const q = `SELECT name, icon FROM categories`;
 
   db.all(q, (err, rows) => {
     if (err) {
