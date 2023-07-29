@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Overpass:ital@0;1&family=Space+Mono:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Overpass:ital@0;1&family=Space+Mono:wght@700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,6 +17,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  min-width: 100%;
 }
 
 a {
@@ -28,12 +29,14 @@ a:hover {
   color: #535bf2;
 }
 
+html,
 body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  height: 100%;
 }
 
 h1 {
@@ -73,8 +76,6 @@ button:focus-visible {
   }
 }
 
-
-
 :root,
 :root.guts {
   --background-color: #fff;
@@ -82,90 +83,94 @@ button:focus-visible {
   --status-color: #14143f;
   --title-color: #14143f;
   --link-color: #14143f;
-  --hover-color: #1C1C1Cff;
-  --image: url("/src/assets/Grafikforside.png")
+  --hover-color: #1c1c1cff;
+  --image: url("/assets/Grafikforside.png");
 }
 
 :root.pastel {
-  --background-color: #CEC7C7;
-  --header-color: #47A4DA;
+  --background-color: #cec7c7;
+  --header-color: #47a4da;
   --status-color: #151241;
   --title-color: #151241;
   --link-color: #151241;
-  --hover-color: #1A1A39;
-  --image: url("/src/assets/pos.webp")
+  --hover-color: #1a1a39;
+  --image: url("/assets/pos.webp");
 }
 
 :root.griffith {
   --background-color: #809592;
   --header-color: #353636ff;
-  --status-color: #F0F0F0ff;
+  --status-color: #f0f0f0ff;
   --title-color: #353636ff;
-  --link-color: #F0F0F0ff;
+  --link-color: #f0f0f0ff;
   --hover-color: #353636ff;
-  --image: url("/src/assets/rack.webp")
+  --image: url("/assets/rack.webp");
 }
 
 :root.gold {
-  --background-color: #18122B;
-  --header-color: #D99433;
-  --status-color: #EDF0E8;
-  --title-color: #D99433;
-  --link-color: #EDF0E8;
-  --hover-color: #433F57;
-  --image: url("/src/assets/pos.webp")
+  --background-color: #18122b;
+  --header-color: #d99433;
+  --status-color: #edf0e8;
+  --title-color: #d99433;
+  --link-color: #edf0e8;
+  --hover-color: #433f57;
+  --image: url("/assets/pos.webp");
 }
 
 :root.sexy {
-  --image: url("/src/assets/sexy.webp");
-  --background-color: #EFEF8D;
-  --header-color: #449FDB;
-  --status-color: #15133F;
-  --title-color: #FE93F4;
-  --link-color: #15133F;
-  --hover-color: #C0DBEA;
+  --image: url("/assets/sexy.webp");
+  --background-color: #efef8d;
+  --header-color: #449fdb;
+  --status-color: #15133f;
+  --title-color: #fe93f4;
+  --link-color: #15133f;
+  --hover-color: #c0dbea;
 }
 
 :root.wms {
-  --image: url("/src/assets/wms.webp");
-  --background-color: #CCCFB0;
-  --header-color: #251D5B;
-  --status-color: #15133F;
-  --title-color: #251D5B;
-  --link-color: #251D5B;
-  --hover-color: #15133F;
+  --image: url("/assets/wms.webp");
+  --background-color: #cccfb0;
+  --header-color: #251d5b;
+  --status-color: #15133f;
+  --title-color: #251d5b;
+  --link-color: #251d5b;
+  --hover-color: #15133f;
 }
 
 :root.rack {
-  --image: url("/src/assets/rack.webp");
+  --image: url("/assets/rack.webp");
   --background-color: #819394;
-  --header-color: #251D5B;
-  --status-color: #15133F;
-  --title-color: #251D5B;
-  --link-color: #251D5B;
-  --hover-color: #15133F;
-  --svg-color: #EFED89;
+  --header-color: #251d5b;
+  --status-color: #15133f;
+  --title-color: #251d5b;
+  --link-color: #251d5b;
+  --hover-color: #15133f;
+  --svg-color: #efed89;
 }
 
 :root.rocket {
-  --image: url("/src/assets/rocket.webp");
+  --image: url("/assets/rocket.webp");
   --background-color: #fff;
-  --header-color: #645FAD;
-  --status-color: #13133C;
-  --title-color: #13133C;
-  --link-color: #13133C;
-  --hover-color: #645FAD;
+  --header-color: #645fad;
+  --status-color: #13133c;
+  --title-color: #13133c;
+  --link-color: #13133c;
+  --hover-color: #645fad;
 }
 
 :root.SCM {
-  --image: url("/src/assets/SCM.webp");
+  --image: url("/assets/SCM.webp");
   --background-color: rgba(0, 0, 0, 0);
-  --background-gradient: linear-gradient(90deg, rgba(68, 159, 217, 1) 0%, rgba(213, 199, 201, 1) 100%);
+  --background-gradient: linear-gradient(
+    90deg,
+    rgba(68, 159, 217, 1) 0%,
+    rgba(213, 199, 201, 1) 100%
+  );
   --header-color: #14143f;
   --status-color: #14143f;
   --title-color: #14143f;
   --link-color: #14143f;
-  --hover-color: #1C1C1Cff;
+  --hover-color: #1c1c1cff;
 }
 
 * {
@@ -183,12 +188,11 @@ body {
   color: var(--header-color);
 }
 
-
 .updated {
   position: absolute;
   bottom: 0;
   right: 0;
-  font-family: 'Overpass', sans-serif;
+  font-family: "Overpass", sans-serif;
   font-size: 0.8rem;
   margin-right: 2%;
 }
@@ -218,13 +222,13 @@ body {
 
 h1 {
   color: var(--header-color);
-  font-family: 'Space Mono', monospace;
+  font-family: "Space Mono", monospace;
   font-size: 5rem;
   margin-right: 14vh;
 }
 
 h4 {
-  font-family: 'Space Mono', monospace;
+  font-family: "Space Mono", monospace;
   font-size: -93rem;
   font-weight: regular;
 }
@@ -234,7 +238,7 @@ h4 {
   margin-top: 1vh;
   margin-bottom: 8vh;
   color: var(--status-color);
-  font-family: 'Overpass', sans-serif;
+  font-family: "Overpass", sans-serif;
   font-size: 1.5rem;
 }
 
@@ -260,11 +264,9 @@ span {
   text-align: center;
 }
 
-
-
 .title {
   margin-top: 2vh;
-  font-family: 'Space Mono', monospace;
+  font-family: "Space Mono", monospace;
   color: var(--title-color);
   font-size: 1.3rem;
 }
@@ -274,7 +276,7 @@ span {
 }
 
 a {
-  font-family: 'Overpass', sans-serif;
+  font-family: "Overpass", sans-serif;
   text-decoration: none;
   font-size: 1.2rem;
   color: var(--link-color);
@@ -282,7 +284,6 @@ a {
 }
 
 a:hover {
-
   color: var(--hover-color);
 }
 
@@ -302,9 +303,9 @@ img {
 }
 
 .grow {
-  transition: all .2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
-span  {
-  margin-right:8px;
+span {
+  margin-right: 8px;
 }
