@@ -4,41 +4,89 @@ import db from "./db.js";
 
 const router = express.Router();
 
-router.get("/categories", (req, res) => {
-  const q = `SELECT name, icon FROM categories`;
+router.get("/categories", async (req, res) => {
+  const categoryQ = `SELECT id, name, icon FROM categories`;
+  const linkQ = `SELECT * FROM links WHERE category_id = ?`;
 
-  db.all(q, (err, rows) => {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    res.status(200);
-    res.json(rows);
-  });
+  try {
+    const categories = await new Promise((resolve, reject) => {
+      db.all(categoryQ, (err, rows) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        if (!rows || rows.length === 0) {
+          reject("No categories found");
+          return;
+        }
+        resolve(rows);
+      });
+    });
+
+    const categoriesWithLinks = await Promise.all(
+      categories.map(async (category) => {
+        const { id, name, icon } = category;
+        const links = await new Promise((resolve, reject) => {
+          db.all(linkQ, [id], (err, rows) => {
+            if (err) {
+              reject(err);
+              return;
+            }
+            resolve(rows);
+          });
+        });
+        return { id, name, icon, links };
+      })
+    );
+
+    res.status(200).json(categoriesWithLinks);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-router.get("/categories/:category_id", (req, res) => {
+router.get("/category/:category_id", async (req, res) => {
   const categoryId = req.params.category_id;
-  const q = `SELECT name, icon FROM categories WHERE id = ?`;
+  const categoryQ = `SELECT name, icon FROM categories WHERE id = ?`;
+  const linkQ = `SELECT * FROM links WHERE category_id = ?`;
 
-  db.get(q, [categoryId], (err, row) => {
-    console.log(`Fetching category with id ${categoryId}`);
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-
-    if (!row) {
-      res.status(404).json({ error: "Category not found" });
-      return;
-    }
-
-    console.log("[OK] done");
+  try {
+    const [category, links] = await Promise.all([
+      new Promise((resolve, reject) => {
+        db.get(categoryQ, [categoryId], (err, row) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          if (!row) {
+            reject("Category not found");
+            return;
+          }
+          resolve(row);
+        });
+      }),
+      new Promise((resolve, reject) => {
+        db.all(linkQ, [categoryId], (err, rows) => {
+          if (err) {
+            reject(err);
+            return;
+          }
+          if (!rows) {
+            reject("No links found for category");
+            return;
+          }
+          resolve(rows);
+        });
+      }),
+    ]);
     res.status(200);
-    res.json(row);
-  });
-});
+    const response = { category, links };
 
+    res.json(response);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 router.get("/links", (req, res) => {
   const q = `SELECT * FROM links`;
