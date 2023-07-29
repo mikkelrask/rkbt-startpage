@@ -128,8 +128,9 @@ router.get("/links/:link_id", (req, res) => {
 router.get("/links/:link_id/delete", (req, res) => {
   const linkId = req.params.link_id;
   const q = `DELETE FROM links WHERE id = ?`;
+  const updated = `UPDATE info SET lastUpdate = (date('now'))`;
 
-  db.get(q, [linkId], (err, row) => {
+  db.(q, [linkId], (err, row) => {
     console.log(`Fetching link with id ${linkId}`);
     if (err) {
       res.status(500).json({ error: err.message });
@@ -140,7 +141,12 @@ router.get("/links/:link_id/delete", (req, res) => {
       res.status(404).json({ error: "Link not found" });
       return;
     }
-
+    db.post(updated, (err) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+    });
     console.log("[OK] done");
     res.json(row);
     res.status(200);
@@ -150,6 +156,7 @@ router.get("/links/:link_id/delete", (req, res) => {
 router.post("/links", (req, res) => {
   const { name, url, category_id } = req.body;
   const q = `INSERT INTO links (name, url, category_id) VALUES (?, ?, ?)`;
+  const updated = `UPDATE info SET lastUpdate = (date('now'))`;
 
   db.run(q, [name, url, category_id], (err) => {
     if (err) {
@@ -161,6 +168,14 @@ router.post("/links", (req, res) => {
       return;
     }
     res.status(201).json({ message: "Link created" });
+    router.post("/info", (req, res) => {
+      db.run(updated, (err) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+          return;
+        }
+      });
+    });
   });
 });
 
