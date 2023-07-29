@@ -147,4 +147,21 @@ router.get("/links/:link_id/delete", (req, res) => {
   });
 });
 
+router.post("/links", (req, res) => {
+  const { name, url, category_id } = req.body;
+  const q = `INSERT INTO links (name, url, category_id) VALUES (?, ?, ?)`;
+
+  db.run(q, [name, url, category_id], (err) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    if (this.changes === 0) {
+      res.status(500).json({ error: "No rows inserted" });
+      return;
+    }
+    res.status(201).json({ message: "Link created" });
+  });
+});
+
 export default router;
