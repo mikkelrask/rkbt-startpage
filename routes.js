@@ -4,6 +4,21 @@ import db from "./db.js";
 
 const router = express.Router();
 
+router.get("/info", (req, res) => {
+  const q = `SELECT * FROM info`;
+
+  db.get(q, (err, row) => {
+    console.log("fetching info");
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    console.log("[200] fetched info");
+    res.json(row);
+    res.status(200);
+  });
+});
+
 router.get("/categories", async (req, res) => {
   const categoryQ = `SELECT id, name, icon FROM categories`;
   const linkQ = `SELECT * FROM links WHERE category_id = ?`;
@@ -125,38 +140,36 @@ router.get("/links/:link_id", (req, res) => {
   });
 });
 
-router.post("/links/:link_id/delete", (req, res) => {
+router.get("/links/:link_id/delete", (req, res) => {
   const linkId = req.params.link_id;
-  const q = `DELETE FROM links WHERE id = ?`;
-  const updated = `UPDATE info SET lastUpdate = (date('now'))`;
+  const deleteQ = `DELETE FROM links WHERE id = ?`;
+  const updateQ = `UPDATE info SET lastUpdated = date('now')`;
 
-  db.run(q, [linkId], (err, row) => {
-    console.log(`Fetching link with id ${linkId}`);
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-
-    if (!row) {
-      res.status(404).json({ error: "[err] Links not found" });
-      return;
-    }
-    db.post(updated, (err) => {
+  db.serialize(() => {
+    db.run(deleteQ, [linkId], (err) => {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
       }
+
+      // Perform the update within a separate transaction
+      db.run(updateQ, (err) => {
+        if (err) {
+          res.status(500).json({ error: err.message });
+          return;
+        }
+
+        console.log(`[200] Link {id: ${linkId}} deleted`);
+        res.status(200).json({ success: true });
+      });
     });
-    console.log("[OK] done");
-    res.json(row);
-    res.status(200);
   });
 });
 
 router.post("/links", (req, res) => {
   const { name, url, category_id } = req.body;
   const q = `INSERT INTO links (name, url, category_id) VALUES (?, ?, ?)`;
-  const updated = `UPDATE info SET lastUpdate = (date('now'))`;
+  const updated = `UPDATE info SET lastUpdated = (date('now'))`;
 
   db.run(q, [name, url, category_id], (err) => {
     if (err) {
