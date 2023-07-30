@@ -7,7 +7,6 @@ import "./App.css";
 function App() {
   return (
     <>
-      <UpdatedAt text="Opdateret d. " date={new Date().toString()} />
       <div>
         <BigImage />
       </div>
@@ -15,6 +14,7 @@ function App() {
       <div className="card-container">
         <Categories />
       </div>
+      <UpdatedAt />
     </>
   );
 }

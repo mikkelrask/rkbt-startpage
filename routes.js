@@ -125,12 +125,12 @@ router.get("/links/:link_id", (req, res) => {
   });
 });
 
-router.get("/links/:link_id/delete", (req, res) => {
+router.post("/links/:link_id/delete", (req, res) => {
   const linkId = req.params.link_id;
   const q = `DELETE FROM links WHERE id = ?`;
   const updated = `UPDATE info SET lastUpdate = (date('now'))`;
 
-  db.(q, [linkId], (err, row) => {
+  db.run(q, [linkId], (err, row) => {
     console.log(`Fetching link with id ${linkId}`);
     if (err) {
       res.status(500).json({ error: err.message });
@@ -138,7 +138,7 @@ router.get("/links/:link_id/delete", (req, res) => {
     }
 
     if (!row) {
-      res.status(404).json({ error: "Link not found" });
+      res.status(404).json({ error: "[err] Links not found" });
       return;
     }
     db.post(updated, (err) => {
