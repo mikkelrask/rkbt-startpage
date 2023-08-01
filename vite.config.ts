@@ -19,7 +19,7 @@ export default defineConfig({
       input: {
         main: resolve(root, "index.html"),
         // resolve /skotland
-        skotland: resolve(root, "skotland", "skotland/index.html"),
+        skotland: resolve(root, "skotland", "index.html"),
       },
     },
   },
