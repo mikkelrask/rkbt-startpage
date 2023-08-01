@@ -309,3 +309,7 @@ img {
 span {
   margin-right: 8px;
 }
+
+.status-strip, h1{
+  width:100%;
+}
