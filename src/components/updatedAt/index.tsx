@@ -1,6 +1,4 @@
-// LastUpdateInfo.js
 import { useState, useEffect } from "react";
-import axios from "axios";
 
 const LastUpdateInfo = () => {
   const [lastUpdateDate, setLastUpdateDate] = useState(null);
@@ -8,10 +6,14 @@ const LastUpdateInfo = () => {
   useEffect(() => {
     const fetchLastUpdateDate = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/info"); // Replace with your server endpoint
-        setLastUpdateDate(response.data.lastUpdated);
+        const response = await fetch("http://localhost:3001/api/info"); // Replace with your server endpoint
+        if (!response.ok) {
+          throw new Error("Failed to fetch last update date.");
+        }
+        const data = await response.json();
+        setLastUpdateDate(data.lastUpdated);
       } catch (error) {
-        console.error("Error fetching last update date:", error); // Use error as it's of type unknown
+        console.error("Error fetching last update date:", error);
       }
     };
 
@@ -20,7 +22,7 @@ const LastUpdateInfo = () => {
 
   return (
     <div className="updated">
-      {lastUpdateDate && <p>Last Updated: {lastUpdateDate}</p>}
+      {lastUpdateDate && <p>Opdateret d. {lastUpdateDate}</p>}
     </div>
   );
 };
