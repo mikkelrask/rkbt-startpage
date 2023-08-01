@@ -1,8 +1,10 @@
 // apiRoutes.js
 import express from "express";
+import bodyParser from "body-parser";
 import db from "./db.js";
 
 const router = express.Router();
+router.use(bodyParser.json());
 
 router.get("/info", (req, res) => {
   const q = `SELECT * FROM info`;
@@ -87,7 +89,7 @@ router.get("/category/:category_id", async (req, res) => {
             return;
           }
           if (!rows) {
-            reject("No links found for category");
+            reject("No links found");
             return;
           }
           resolve(rows);
@@ -167,29 +169,34 @@ router.get("/links/:link_id/delete", (req, res) => {
 });
 
 router.post("/links", (req, res) => {
-  const { name, url, category_id } = req.body;
-  const q = `INSERT INTO links (name, url, category_id) VALUES (?, ?, ?)`;
+  const { title, url, category_id } = req.body;
+  const q = `INSERT INTO links (title, url, category_id) VALUES (?, ?, ?)`;
   const updated = `UPDATE info SET lastUpdated = (date('now'))`;
 
-  db.run(q, [name, url, category_id], (err) => {
+  db.run(q, [title, url, category_id], function (err) {
     if (err) {
       res.status(500).json({ error: err.message });
       return;
     }
+    
+    // Use this.changes inside the callback instead
     if (this.changes === 0) {
       res.status(500).json({ error: "No rows inserted" });
       return;
     }
-    res.status(201).json({ message: "Link created" });
-    router.post("/info", (req, res) => {
-      db.run(updated, (err) => {
-        if (err) {
-          res.status(500).json({ error: err.message });
-          return;
-        }
-      });
+
+    db.run(updated, (err) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+
+      res.status(201).json({ message: "Link created" });
     });
   });
 });
+
+
+
 
 export default router;
