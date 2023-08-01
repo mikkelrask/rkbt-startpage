@@ -18,12 +18,11 @@ const AddLink: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("/api/categories");
+        const response = await fetch("http://localhost:3001/api/categories");
         if (!response.ok) {
           throw new Error("Failed to fetch categories.");
         }
         const data: Category[] = await response.json();
-        console.log(data); // Add this line to check the data received from the API
         setCategories(data);
       } catch (error) {
         console.error(error);
@@ -32,6 +31,42 @@ const AddLink: React.FC = () => {
 
     fetchCategories();
   }, []);
+
+  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      // Create a new link object based on the form data
+      const newLink = {
+        title: title,
+        url: url,
+        category_id: selectedCategoryId
+      };
+
+      // Send the new link data to the API endpoint
+      const response = await fetch("http://localhost:3001/api/links", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newLink)
+      });
+        console.log(JSON.stringify(newLink));
+
+      if (!response.ok) {
+        throw new Error("Failed to add link.");
+      }
+
+      console.log("Link added successfully!");
+
+      // Clear the form after successful submission
+      setTitle("");
+      setUrl("");
+      setSelectedCategoryId(null);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleDropdownChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -47,47 +82,49 @@ const AddLink: React.FC = () => {
       if (selectedCategory.links.length > 0) {
         setUrl(selectedCategory.links[0].url);
       } else {
-        setUrl(""); // Set the URL to empty string if there are no links in the category
+        setUrl(""); // Set the URL to an empty string if there are no links in the category
       }
     }
   };
 
   return (
     <div>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="url">URL:</label>
-        <input
-          type="text"
-          id="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="dropdown">Select Category:</label>
-        <select
-          id="dropdown"
-          value={selectedCategoryId}
-          onChange={handleDropdownChange}
-        >
-          <option value={null}>Select a category</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-        <button type="submit">Add Link</button>
-      </div>
+      <form onSubmit={handleFormSubmit}>
+        <div>
+          <label htmlFor="title">Title:</label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="url">URL:</label>
+          <input
+            type="text"
+            id="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="dropdown">Select Category:</label>
+          <select
+            id="dropdown"
+            value={selectedCategoryId?.toString()}
+            onChange={handleDropdownChange}
+          >
+            <option value="">Select a category</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <button type="submit">Add Link</button>
+        </div>
+      </form>
     </div>
   );
 };
