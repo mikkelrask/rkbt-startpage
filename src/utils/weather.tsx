@@ -1,16 +1,27 @@
-import config from "./config/config.js";
+import config from "./config/config.tsx";
 
-const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${config.LAT}&lon=${config.LON}&appid=${config.TOKEN}`;
+interface WeatherData {
+  weather: {
+    main: string;
+    description: string;
+    icon: string;
+  }[];
+}
 
-console.log(URL, config.TOKEN, config.LAT, config.LON);
+const TOKEN = import.meta.env.OPENWEATHER_TOKEN as string;
 
-const GetWeatherData = async () => {
+const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${config.LAT}&lon=${config.LON}&appid=${TOKEN}`;
+
+console.log(URL, TOKEN, config.LAT, config.LON);
+
+const GetWeatherData = async (): Promise<string | null> => {
   try {
     const response = await fetch(URL);
-    const data = await response.json();
+    const data = (await response.json()) as WeatherData;
     console.log(data.weather[0].main);
-    console.log(data.weather[0].main.toLowerCase());
-    return data.weather[0];
+    console.log(data.weather[0].description);
+    console.log(data.weather[0].icon);
+    return data.weather[0].description;
   } catch (e) {
     console.error("Failed to fetch weather data. See response", e);
     return null;

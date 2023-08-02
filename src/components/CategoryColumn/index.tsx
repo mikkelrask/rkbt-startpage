@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Link from "../Link";
 
-const categoriesUrl = "/api/categories"; // Updated route URL
-const apiBaseUrl = "https://api.raske.xyz";
-const categoriesApiUrl = `${apiBaseUrl}${categoriesUrl}`;
+const categoriesUrl = "/api/categories";
+const categoriesApiUrl = `${
+  import.meta.env.EXPRESS_API_BASE_URL as string
+}${categoriesUrl}`;
 
 interface LinkData {
   id: number;
@@ -28,14 +29,14 @@ const Categories: React.FC = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch categories.");
         }
-        const data: Category[] = await response.json();
+        const data = (await response.json()) as Category[];
         setCategories(data);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchCategories();
+    void fetchCategories();
   }, []);
 
   return (
