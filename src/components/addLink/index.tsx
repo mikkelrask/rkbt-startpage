@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 
+const categoriesUrl = "/api/categories";
+const linksUrl = "/api/links";
+const baseUrl = `${import.meta.env.EXPRESS_API_BASE_URL as string}`;
+console.log(baseUrl);
 interface Category {
   id: number;
   name: string;
@@ -18,54 +22,52 @@ const AddLink: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("https://api.raske.xyz/api/categories");
+        const response = await fetch(`${baseUrl}${categoriesUrl}`);
         if (!response.ok) {
           throw new Error("Failed to fetch categories.");
         }
-        const data: Category[] = await response.json();
+        const data = (await response.json()) as Category[];
         setCategories(data);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchCategories();
+    void fetchCategories();
   }, []);
 
-  const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      // Create a new link object based on the form data
-      const newLink = {
-        title: title,
-        url: url,
-        category_id: selectedCategoryId,
-      };
+    // Create a new link object based on the form data
+    const newLink = {
+      title: title,
+      url: url,
+      category_id: selectedCategoryId,
+    };
 
-      // Send the new link data to the API endpoint
-      const response = await fetch("https://api.raske.xyz/api/links", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newLink),
+    // Send the new link data to the API endpoint
+    fetch(`${baseUrl}${linksUrl}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newLink),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to add link.");
+        }
+        console.log("Link added successfully!");
+
+        // Clear the form after successful submission
+        setTitle("");
+        setUrl("");
+        setSelectedCategoryId(null);
+      })
+      .catch((error) => {
+        console.error(error);
       });
-      console.log(JSON.stringify(newLink));
-
-      if (!response.ok) {
-        throw new Error("Failed to add link.");
-      }
-
-      console.log("Link added successfully!");
-
-      // Clear the form after successful submission
-      setTitle("");
-      setUrl("");
-      setSelectedCategoryId(null);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const handleDropdownChange = (
