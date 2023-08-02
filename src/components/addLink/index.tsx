@@ -18,7 +18,7 @@ const AddLink: React.FC = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/categories");
+        const response = await fetch("https://api.raske.xyz/api/categories");
         if (!response.ok) {
           throw new Error("Failed to fetch categories.");
         }
@@ -40,18 +40,18 @@ const AddLink: React.FC = () => {
       const newLink = {
         title: title,
         url: url,
-        category_id: selectedCategoryId
+        category_id: selectedCategoryId,
       };
 
       // Send the new link data to the API endpoint
-      const response = await fetch("http://localhost:3001/api/links", {
+      const response = await fetch("https://api.raske.xyz/api/links", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(newLink)
+        body: JSON.stringify(newLink),
       });
-        console.log(JSON.stringify(newLink));
+      console.log(JSON.stringify(newLink));
 
       if (!response.ok) {
         throw new Error("Failed to add link.");

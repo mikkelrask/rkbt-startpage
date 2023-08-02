@@ -1,4 +1,4 @@
-import config from './config/config.js';
+import config from "./config/config.js";
 
 const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${config.LAT}&lon=${config.LON}&appid=${config.TOKEN}`;
 
@@ -9,10 +9,10 @@ const GetWeatherData = async () => {
     const response = await fetch(URL);
     const data = await response.json();
     console.log(data.weather[0].main);
-    console.log(response);
-    return data.weather[0].description;
+    console.log(data.weather[0].main.toLowerCase());
+    return data.weather[0];
   } catch (e) {
-    console.error('Failed to fetch weather data. See response', e);
+    console.error("Failed to fetch weather data. See response", e);
     return null;
   }
 };

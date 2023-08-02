@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from "../Link";
 
 const categoriesUrl = "/api/categories"; // Updated route URL
-const apiBaseUrl = "http://localhost:3001";
+const apiBaseUrl = "https://api.raske.xyz";
 const categoriesApiUrl = `${apiBaseUrl}${categoriesUrl}`;
 
 interface LinkData {

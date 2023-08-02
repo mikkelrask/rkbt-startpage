@@ -6,7 +6,7 @@ const LastUpdateInfo = () => {
   useEffect(() => {
     const fetchLastUpdateDate = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/info"); // Replace with your server endpoint
+        const response = await fetch("https://api.raske.xyz/api/info"); // Replace with your server endpoint
         if (!response.ok) {
           throw new Error("Failed to fetch last update date.");
         }
