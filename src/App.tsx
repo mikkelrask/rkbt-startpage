@@ -7,9 +7,7 @@ import "./App.css";
 function App() {
   return (
     <>
-
-        <BigImage />
-
+      <BigImage />
       <HeaderContainer />
       <div className="card-container">
         <Categories />
