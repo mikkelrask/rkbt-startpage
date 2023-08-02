@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 const infoUrl = "/api/info";
 const baseUrl = `${import.meta.env.EXPRESS_API_BASE_URL as string}`;
 
+console.log(baseUrl, infoUrl);
+
 interface InfoResponse {
   lastUpdated: string;
 }
