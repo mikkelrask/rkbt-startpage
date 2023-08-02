@@ -13,7 +13,7 @@ export default defineConfig({
     outDir,
     emptyOutDir: true,
     sourcemap: true,
-    minify: true,
+    minify: false,
     rollupOptions: {
       input: {
         main: resolve(root, "index.html"),
