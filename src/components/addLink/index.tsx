@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const categoriesUrl = "/api/categories";
 const linksUrl = "/api/links";
-const baseUrl = `${import.meta.env.EXPRESS_API_BASE_URL as string}`;
-console.log(baseUrl);
+const baseUrl = `${import.meta.env.VITE_EXPRESS_API_BASE_URL as string}`;
 interface Category {
   id: number;
   name: string;

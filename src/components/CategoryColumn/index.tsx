@@ -3,7 +3,7 @@ import Link from "../Link";
 
 const categoriesUrl = "/api/categories";
 const categoriesApiUrl = `${
-  import.meta.env.EXPRESS_API_BASE_URL as string
+  import.meta.env.VITE_EXPRESS_API_BASE_URL as string
 }${categoriesUrl}`;
 
 interface LinkData {

@@ -8,7 +8,7 @@ interface WeatherData {
   }[];
 }
 
-const TOKEN = import.meta.env.OPENWEATHER_TOKEN as string;
+const TOKEN = import.meta.env.VITE_OPENWEATHER_TOKEN as string;
 
 const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${config.LAT}&lon=${config.LON}&appid=${TOKEN}`;
 
