@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Card from "../Card";
 
 const categoriesUrl = "/api/categories";
 const linksUrl = "/api/links";
@@ -74,59 +75,51 @@ const AddLink: React.FC = () => {
   ) => {
     const categoryId = Number(event.target.value);
     setSelectedCategoryId(categoryId);
-    const selectedCategory = categories.find(
-      (category) => category.id === categoryId
-    );
-    if (selectedCategory) {
-      setTitle(selectedCategory.name);
-      // For demonstration purposes, we set the URL as the first link in the selected category
-      if (selectedCategory.links.length > 0) {
-        setUrl(selectedCategory.links[0].url);
-      } else {
-        setUrl(""); // Set the URL to an empty string if there are no links in the category
-      }
-    }
   };
 
   return (
-    <div>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="url">URL:</label>
-          <input
-            type="text"
-            id="url"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="dropdown">Select Category:</label>
-          <select
-            id="dropdown"
-            value={selectedCategoryId?.toString()}
-            onChange={handleDropdownChange}
-          >
-            <option value="">Select a category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-          <button type="submit">Add Link</button>
-        </div>
-      </form>
-    </div>
+    <Card title="Nyt link">
+      <div>
+        <form onSubmit={handleFormSubmit}>
+          <div>
+            <label htmlFor="title">Navn:</label>
+            <input
+              type="text"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="url">Adresse:</label>
+            <input
+              type="text"
+              id="url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="dropdown">Kategori:</label>
+            <select
+              id="dropdown"
+              value={selectedCategoryId?.toString()}
+              onChange={handleDropdownChange}
+            >
+              <option value="Kolonne:">Select</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+            <button type="submit" placeholder="Kolonne" value="kolonne">
+              Tilføj
+            </button>
+          </div>
+        </form>
+      </div>
+    </Card>
   );
 };
 

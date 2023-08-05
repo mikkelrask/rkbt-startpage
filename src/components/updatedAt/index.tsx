@@ -20,7 +20,7 @@ const LastUpdateInfo = () => {
         const info = (await response.json()) as InfoResponse;
         setLastUpdateDate(info.lastUpdated);
       } catch (error) {
-        console.error("Error fetching last update date:", error);
+        console.error("☠️:", error);
       }
     };
 

@@ -33,7 +33,7 @@ router.get("/categories", async (req, res) => {
           return;
         }
         if (!rows || rows.length === 0) {
-          reject("No categories found");
+          reject("No categories found 🚯");
           return;
         }
         resolve(rows);
@@ -76,7 +76,7 @@ router.get("/category/:category_id", async (req, res) => {
             return;
           }
           if (!row) {
-            reject("Category not found");
+            reject("Category not found 🚯");
             return;
           }
           resolve(row);
@@ -89,7 +89,7 @@ router.get("/category/:category_id", async (req, res) => {
             return;
           }
           if (!rows) {
-            reject("No links found");
+            reject("No links found 🚯");
             return;
           }
           resolve(rows);
@@ -114,7 +114,7 @@ router.get("/links", (req, res) => {
       res.status(500).json({ error: err.message });
       return;
     }
-    console.log("[OK] done");
+    console.log("[OK] done ✅");
     res.json(rows);
     res.status(200);
   });
@@ -146,23 +146,40 @@ router.get("/links/:link_id/delete", (req, res) => {
   const linkId = req.params.link_id;
   const deleteQ = `DELETE FROM links WHERE id = ?`;
   const updateQ = `UPDATE info SET lastUpdated = date('now')`;
+  const selectQ = `SELECT id FROM links WHERE id = ?`;
 
   db.serialize(() => {
-    db.run(deleteQ, [linkId], (err) => {
+    // Check if the linkId exists in the links table
+    db.get(selectQ, [linkId], (err, row) => {
       if (err) {
         res.status(500).json({ error: err.message });
         return;
       }
 
-      // Perform the update within a separate transaction
-      db.run(updateQ, (err) => {
+      if (!row) {
+        // If the linkId does not exist in the links table, return a 404 response
+        console.log(`[404] Link with id ${linkId} not found 🚯`);
+        res.status(404).json({ error: `Link with id ${linkId} not found 🚯` });
+        return;
+      }
+
+      // If the linkId exists, proceed with the deletion and update
+      db.run(deleteQ, [linkId], (err) => {
         if (err) {
           res.status(500).json({ error: err.message });
           return;
         }
 
-        console.log(`[200] Link {id: ${linkId}} deleted`);
-        res.status(200).json({ success: true });
+        // Perform the update within a separate transaction
+        db.run(updateQ, (err) => {
+          if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+          }
+
+          console.log(`[200] Link {id: ${linkId}} deleted ☠️`);
+          res.status(200).json({ linkId: "☠️" });
+        });
       });
     });
   });
@@ -178,7 +195,7 @@ router.post("/links", (req, res) => {
       res.status(500).json({ error: err.message });
       return;
     }
-    
+
     // Use this.changes inside the callback instead
     if (this.changes === 0) {
       res.status(500).json({ error: "No rows inserted" });
@@ -196,7 +213,29 @@ router.post("/links", (req, res) => {
   });
 });
 
-
-
+//pdate a link
+router.put("/links/:link_id", (req, res) => {
+  const linkId = req.params.link_id;
+  const { title, url, category_id } = req.body;
+  const q = `UPDATE links SET title = ?, url = ?, category_id = ? WHERE id = ?`;
+  const updated = `UPDATE info SET lastUpdated = (date('now'))`;
+  db.run(q, [title, url, category_id, linkId], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    if (this.changes === 0) {
+      res.status(500).json({ error: "No rows updated" });
+      return;
+    }
+    db.run(updated, (err) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+    });
+    res.status(200).json({ message: "Link updated" });
+  });
+});
 
 export default router;
