@@ -8,9 +8,11 @@ function App() {
   return (
     <>
       <BigImage />
-      <HeaderContainer />
-      <div className="card-container">
-        <Categories />
+      <div className="right-container">
+        <HeaderContainer />
+        <div className="card-container">
+          <Categories />
+        </div>
       </div>
       <UpdatedAt />
     </>
