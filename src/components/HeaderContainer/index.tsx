@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import GetWeatherData from "../../utils/weather"; // Remove the 'default' keyword
+import GetWeatherData from "../../utils/weather"; 
 
 const HeaderContainer = () => {
-  const [weatherData, setWeatherData] = useState("");
+  const [weatherData, setWeatherData] = useState<string | null>(null);
 
   useEffect(() => {
     GetWeatherData().then((data) => {
