@@ -8,7 +8,7 @@ interface LinkProps {
 
 const Link: React.FC<LinkProps> = ({ url, title }) => {
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer">
+    <a href={url} target="_parent" rel="noopener noreferrer">
       {title}
     </a>
   );

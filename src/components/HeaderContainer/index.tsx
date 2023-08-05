@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import GetWeatherData from "../../utils/weather"; 
 
 const HeaderContainer = () => {
-  const [weatherData, setWeatherData] = useState<string | null>(null);
+  const [weatherData, setWeatherData] = useState<string | null>(null)
 
   useEffect(() => {
     GetWeatherData().then((data) => {

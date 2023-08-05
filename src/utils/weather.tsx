@@ -16,6 +16,7 @@ const GetWeatherData = async (): Promise<string | null> => {
   try {
     const response = await fetch(URL);
     const data = (await response.json()) as WeatherData;
+    console.log(data);
     return data.weather[0].description;
   } catch (e) {
     console.error("Failed to fetch weather data. See response", e);

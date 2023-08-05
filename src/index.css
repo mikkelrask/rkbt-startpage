@@ -198,7 +198,7 @@ body {
 
 .image-container {
   flex: 1;
-  max-width: 35vw;
+  max-width: 30vw;
 }
 
 .image-container img {
@@ -287,9 +287,7 @@ img {
   grid-column: 1;
   grid-row: 2;
   justify-self: end;
-  width: 60vh;
-  height: 60vh;
-  margin-right: 0 auto;
+  margin: 0 auto;
   content: var(--image);
 }
 
