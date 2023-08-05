@@ -45,8 +45,6 @@ function translateDescription(description: string): string {
 const TOKEN = import.meta.env.VITE_OPENWEATHER_TOKEN as string;
 
 const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${config.LAT}&lon=${config.LON}&appid=${TOKEN}&units=imperial`;
-const ICON = 'https://openweathermap.org/img/wn/'
-const ICON_EXT = '@2x.png'
 
 const GetWeatherData = async (): Promise<string | null> => {
   try {
