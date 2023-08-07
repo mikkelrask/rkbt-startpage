@@ -2,6 +2,9 @@
 html {
   font-family: Overpass, 'Space Mono', Sans-serif;
 }
+body{
+  max-width: 1600px;
+}
 .card {
   text-align: left;
   background-color: #f8f8f8;
