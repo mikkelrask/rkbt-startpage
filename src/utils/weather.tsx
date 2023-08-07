@@ -23,10 +23,14 @@ function translateDescription(description: string): string {
       return "klar himmel ☀️";
     case "few clouds":
       return "få skyer 🌤️";
+    case "ovecast clouds":
+      return "overskyet ☁️";
     case "scattered clouds":
       return "spredte skyer ☁️";
     case "broken clouds":
       return "brudte skyer 🌥️";
+    case "light rain":
+      return "let regn 🌦️";
     case "shower rain":
       return "byger 🌧️";
     case "rain":
