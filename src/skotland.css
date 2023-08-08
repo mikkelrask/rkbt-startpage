@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Overpass:ital@0;1&family=Space+Mono:wght@700&display=swap");
 html {
-  font-family: Overpass, 'Space Mono', Sans-serif;
+  font-family: Overpass, "Space Mono", Sans-serif;
 }
-body{
+body {
   max-width: 1600px;
+  margin: 0 auto;
 }
 .card {
   text-align: left;
@@ -12,30 +13,30 @@ body{
   padding: 20px;
   height: auto;
   margin: 1rem;
-  width: 300px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
   overflow: hidden;
-  box-shadow: 0 75.2107rem 150.4215rem rgba(101,87,255,.15);
+  box-shadow: 0 75.2107rem 150.4215rem rgba(101, 87, 255, 0.15);
 }
-
+table {
+  width: 100%;
+}
 form label {
-  font-size: 1rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
   color: #a6a6a6;
   width: 100%;
 }
-form input {
+input {
+  padding: 5px;
   font-size: 1.5rem;
-  font-weight: 600;
   background-color: #fff;
   color: #000;
   width: 100%;
-  margin-bottom: 1.5rem;
 }
-form select {
+select {
   padding: 5px;
   font-size: 1.5rem;
-  font-weight: 600;
   background-color: #fff;
   color: #000;
   width: 100%;
@@ -53,6 +54,7 @@ form select {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+
 .card h2 {
   font-size: 1.5rem;
   text-transform: uppercase;
