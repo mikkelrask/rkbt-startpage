@@ -23,7 +23,7 @@ function translateDescription(description: string): string {
       return "☀️";
     case "few clouds":
       return "🌤️";
-    case "ovecast clouds":
+    case "overcast clouds":
       return "☁️";
     case "scattered clouds":
       return "☁️";
