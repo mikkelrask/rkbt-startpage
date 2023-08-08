@@ -20,27 +20,27 @@ function kelvinToCelsius(k: number): number {
 function translateDescription(description: string): string {
   switch (description) {
     case "clear sky":
-      return "klar himmel ☀️";
+      return "☀️";
     case "few clouds":
-      return "få skyer 🌤️";
+      return "🌤️";
     case "ovecast clouds":
-      return "overskyet ☁️";
+      return "☁️";
     case "scattered clouds":
-      return "spredte skyer ☁️";
+      return "☁️";
     case "broken clouds":
-      return "brudte skyer 🌥️";
+      return "🌥️";
     case "light rain":
-      return "let regn 🌦️";
+      return "🌦️";
     case "shower rain":
-      return "byger 🌧️";
+      return "🌧️";
     case "rain":
-      return "regn 🌧️";
+      return "🌧️";
     case "thunderstorm":
-      return "torden ⛈️";
+      return "⛈️";
     case "snow":
-      return "sne ❄️";
+      return "❄️";
     case "mist":
-      return "tåge 🌫️";
+      return "🌫️";
     default:
       return description;
   }
@@ -53,7 +53,7 @@ const GetWeatherData = async (): Promise<string | null> => {
   try {
     const response = await fetch(URL);
     const data = (await response.json()) as WeatherData;
-    return kelvinToCelsius(data.main.temp) + "°C (" + translateDescription(data.weather[0].description) + ")";
+    return kelvinToCelsius(data.main.temp) + "°C " + translateDescription(data.weather[0].description);
   } catch (e) {
     console.error("Failed to fetch weather data. See response", e);
     return "☠️: " + e;
