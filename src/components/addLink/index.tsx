@@ -60,10 +60,7 @@ const AddLink: React.FC = () => {
         }
         console.log("Link added successfully!");
 
-        // Clear the form after successful submission
-        setTitle("");
-        setUrl("");
-        setSelectedCategoryId(null);
+        window.location.reload();
       })
       .catch((error) => {
         console.error(error);
