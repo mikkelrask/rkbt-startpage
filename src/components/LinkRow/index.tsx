@@ -35,16 +35,18 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
   );
 
   const handleSave = async () => {
+    const sanitizedUrl = sanitizeUrl(url);
+
     const updatedLink = {
       id: link.id,
       title: title,
-      url: url,
+      url: sanitizedUrl,
       category_id: selectedCategoryId,
     };
 
     try {
       const response = await fetch(`${baseUrl}${linksUrl}/${link.id}`, {
-        method: "PUT", // or "PATCH" depending on your API
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Bearer: `${import.meta.env.VITE_EXPRESS_API_BEARER as string}`,
@@ -60,7 +62,7 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
     } catch (error) {
       console.error(error);
     }
-    console.log({ title, url, selectedCategoryId });
+    console.log({ title, sanitizedUrl, selectedCategoryId });
   };
 
   const handleDelete = async () => {
