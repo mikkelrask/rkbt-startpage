@@ -49,7 +49,7 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Bearer: `${import.meta.env.VITE_EXPRESS_API_BEARER as string}`,
+          "Bearer": `${import.meta.env.VITE_EXPRESS_API_BEARER as string}`,
         },
         body: JSON.stringify(updatedLink),
       });
