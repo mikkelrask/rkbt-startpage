@@ -104,7 +104,6 @@ router.get("/category/:category_id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 router.get("/links", (req, res) => {
   const q = `SELECT * FROM links`;
 
@@ -120,6 +119,7 @@ router.get("/links", (req, res) => {
   });
 });
 
+//get specific link
 router.get("/links/:link_id", (req, res) => {
   const linkId = req.params.link_id;
   const q = `SELECT * FROM links WHERE id = ?`;
@@ -141,7 +141,33 @@ router.get("/links/:link_id", (req, res) => {
     res.status(200);
   });
 });
+// Update a link
+router.put("/links/:link_id", (req, res) => {
+  const linkId = req.params.link_id; // Fetch the link_id parameter from the URL
+  const { title, url, category_id } = req.body;
+  const q = `UPDATE links SET title = ?, url = ?, category_id = ? WHERE id = ?`;
+  const updated = `UPDATE info SET lastUpdated = (date('now'))`;
+  
+  db.run(q, [title, url, category_id, linkId], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    if (this.changes === 0) {
+      res.status(500).json({ error: "No rows updated" });
+      return;
+    }
+    db.run(updated, (err) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+        return;
+      }
+    });
+    res.status(200).json({ message: "Link updated" });
+  });
+});
 
+// delete link
 router.get("/links/:link_id/delete", (req, res) => {
   const linkId = req.params.link_id;
   const deleteQ = `DELETE FROM links WHERE id = ?`;
@@ -185,6 +211,7 @@ router.get("/links/:link_id/delete", (req, res) => {
   });
 });
 
+// Create link
 router.post("/links", (req, res) => {
   const { title, url, category_id } = req.body;
   const q = `INSERT INTO links (title, url, category_id) VALUES (?, ?, ?)`;
@@ -213,32 +240,6 @@ router.post("/links", (req, res) => {
   });
 });
 
-//pdate a link
-// Update a link
-router.put("/links/:link_id", (req, res) => {
-  const linkId = req.params.link_id; // Fetch the link_id parameter from the URL
-  const { title, url, category_id } = req.body;
-  const q = `UPDATE links SET title = ?, url = ?, category_id = ? WHERE id = ?`;
-  const updated = `UPDATE info SET lastUpdated = (date('now'))`;
-  
-  db.run(q, [title, url, category_id, linkId], function (err) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-      return;
-    }
-    if (this.changes === 0) {
-      res.status(500).json({ error: "No rows updated" });
-      return;
-    }
-    db.run(updated, (err) => {
-      if (err) {
-        res.status(500).json({ error: err.message });
-        return;
-      }
-    });
-    res.status(200).json({ message: "Link updated" });
-  });
-});
 
 
 export default router;
