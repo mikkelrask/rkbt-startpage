@@ -82,6 +82,7 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
 
   const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
+    handleSave();
   };
 
   const handleCategoryChange = (

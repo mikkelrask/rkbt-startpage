@@ -214,11 +214,13 @@ router.post("/links", (req, res) => {
 });
 
 //pdate a link
+// Update a link
 router.put("/links/:link_id", (req, res) => {
-  const linkId = req.params.link_id;
+  const linkId = req.params.link_id; // Fetch the link_id parameter from the URL
   const { title, url, category_id } = req.body;
   const q = `UPDATE links SET title = ?, url = ?, category_id = ? WHERE id = ?`;
   const updated = `UPDATE info SET lastUpdated = (date('now'))`;
+  
   db.run(q, [title, url, category_id, linkId], function (err) {
     if (err) {
       res.status(500).json({ error: err.message });
@@ -237,5 +239,6 @@ router.put("/links/:link_id", (req, res) => {
     res.status(200).json({ message: "Link updated" });
   });
 });
+
 
 export default router;
