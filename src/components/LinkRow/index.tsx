@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState } from "react";
 
 const baseUrl = `${import.meta.env.VITE_EXPRESS_API_BASE_URL as string}`;
@@ -20,13 +21,6 @@ interface LinkRowProps {
   categories: Category[];
 }
 
-function sanitizeUrl(url: string): string {
-  if (!url.startsWith("http://") && !url.startsWith("https://")) {
-    return `http://${url}`;
-  }
-  return url;
-}
-
 const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
   const [title, setTitle] = useState(link.title);
   const [url, setUrl] = useState(link.url);
@@ -35,12 +29,11 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
   );
 
   const handleSave = async () => {
-    const sanitizedUrl = sanitizeUrl(url);
 
     const updatedLink = {
       id: link.id,
       title: title,
-      url: sanitizedUrl,
+      url: url,
       category_id: selectedCategoryId,
     };
 
@@ -62,7 +55,7 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
     } catch (error) {
       console.error(error);
     }
-    console.log({ title, sanitizedUrl, selectedCategoryId });
+    console.log({ title, url, selectedCategoryId });
   };
 
   const handleDelete = async () => {
@@ -103,7 +96,7 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
         <input type="text" value={title} onChange={handleTitleChange} />
       </td>
       <td>
-        <input type="text" value={url} onChange={handleUrlChange} />
+        <input type="url" value={url} onChange={handleUrlChange} />
       </td>
       <td>
         <select value={selectedCategoryId} onChange={handleCategoryChange}>
@@ -116,12 +109,12 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
       </td>
       <td>
         <a href="#" onClick={handleSave}>
-          Save
+          <button className="save">Save</button>
         </a>
       </td>
       <td>
         <a href="#" onClick={handleDelete}>
-          Delete
+          <button className="del">Delete</button>
         </a>
       </td>
     </tr>

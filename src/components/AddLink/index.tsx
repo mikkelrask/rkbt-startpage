@@ -90,7 +90,7 @@ const AddLink: React.FC = () => {
           <div>
             <label htmlFor="url">Adresse:</label>
             <input
-              type="text"
+              type="url"
               id="url"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
