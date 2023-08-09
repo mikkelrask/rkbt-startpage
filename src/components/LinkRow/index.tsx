@@ -80,9 +80,9 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
     setTitle(event.target.value);
   };
 
-  const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUrlChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
-    handleSave();
+    await handleSave();
   };
 
   const handleCategoryChange = (
