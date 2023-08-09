@@ -53,10 +53,10 @@ const GetWeatherData = async (): Promise<string | null> => {
   try {
     const response = await fetch(URL);
     const data = (await response.json()) as WeatherData;
-    return kelvinToCelsius(data.main.temp) + "°C " + translateDescription(data.weather[0].description);
+    return kelvinToCelsius(data.main.temp).toString() + "°C " + translateDescription(data.weather[0].description);
   } catch (e) {
     console.error("Failed to fetch weather data. See response", e);
-    return "☠️: " + e;
+    return "☠️: " + `$e`;
   }
 };
 
