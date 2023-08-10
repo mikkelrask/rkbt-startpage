@@ -109,13 +109,14 @@ const LinkRow: React.FC<LinkRowProps> = ({ link, categories }) => {
         </select>
       </td>
       <td>
-        <a href="#" onClick={handleSave}>
-          <button className="save">Save</button>
-        </a>
-      </td>
-      <td>
         <a href="#" onClick={handleDelete}>
           <button className="del">Delete</button>
+        </a>
+        
+      </td>
+      <td>
+        <a href="#" onClick={handleSave}>
+          <button className="save">Save</button>
         </a>
       </td>
     </tr>

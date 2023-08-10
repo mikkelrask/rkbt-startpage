@@ -5,6 +5,7 @@ html {
 body {
   max-width: 1600px;
   margin: 0 auto;
+  background-color: #abb8c3;
 }
 .card {
   text-align: left;
@@ -33,6 +34,7 @@ input {
   background-color: #fff;
   color: #000;
   width: 100%;
+  border:0px;
 }
 select {
   padding: 5px;
@@ -47,7 +49,18 @@ select {
   background-color: #00d084;
   color: #fff;
   font-size: 1.5rem;
-  font-weight: 600;
+  padding: 10px;
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.card form button:hover {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #7bdcb5;
+  color: #fff;
+  font-size: 1.5rem;
   padding: 10px;
   border-radius: 15px;
   border: none;
@@ -57,9 +70,29 @@ select {
 
 .card h2 {
   font-size: 1.5rem;
-  text-transform: uppercase;
-  font-weight: 600;
   color: #636363;
   width: 100%;
   padding-bottom: 10px;
+}
+.save {
+  background-color: #00d084;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+}
+.save:hover {
+  background-color: #7bdcb5;
+}
+.del {
+  background-color: #ff3b30;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+}
+.del:hover {
+  background-color: #fd7069;
 }
