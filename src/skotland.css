@@ -1,48 +1,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Overpass:ital@0;1&family=Space+Mono:wght@700&display=swap");
-html {
-  font-family: Overpass, "Space Mono", Sans-serif;
+
+html,
+body {
+  font-family: 'Overpass', 'Space Mono', sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
 body {
   max-width: 1600px;
   margin: 0 auto;
   background-color: #abb8c3;
 }
+
 .card {
-  text-align: left;
   background-color: #f8f8f8;
-  border-radius: 25px;
-  padding: 20px;
-  height: auto;
+  border-radius: 5px;
+  padding: 15px;
   margin: 1rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 75.2107rem 150.4215rem rgba(101, 87, 255, 0.15);
   transition: all 0.3s ease-in-out;
   overflow: hidden;
-  box-shadow: 0 75.2107rem 150.4215rem rgba(101, 87, 255, 0.15);
 }
-table {
+
+table,
+form {
   width: 100%;
 }
-form label {
-  font-size: 0.9rem;
+
+label {
+  font-size: 0.7rem;
   text-transform: uppercase;
   color: #a6a6a6;
   width: 100%;
 }
-input {
-  padding: 5px;
-  font-size: 1.5rem;
-  background-color: #fff;
-  color: #000;
-  width: 100%;
-  border:0px;
-}
+
+input,
 select {
   padding: 5px;
   font-size: 1.5rem;
-  background-color: #fff;
-  color: #000;
-  width: 100%;
+  background-color: #f8f8f8;
+  color: #888;
+  max-width: 95%;
+  border: 0;
+  margin-bottom:10px;
+  border: 2px solid rgba(0,0,0,0);
+  
 }
+input:focus, select:focus {
+  background-color:#fff;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;border: 1px solid rgba(0, 0, 0, .3);
+}
+
 .card form button {
   margin-top: 20px;
   width: 100%;
@@ -50,22 +60,20 @@ select {
   color: #fff;
   font-size: 1.5rem;
   padding: 10px;
-  border-radius: 15px;
+  border-radius: 5px;
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+  vertical-align: middle;;
 }
+
 .card form button:hover {
-  margin-top: 20px;
-  width: 100%;
   background-color: #7bdcb5;
-  color: #fff;
-  font-size: 1.5rem;
-  padding: 10px;
-  border-radius: 15px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
+}
+
+.card form button:active {
+  background-color: #369a77;
+  /* Darker version of hover color */
 }
 
 .card h2 {
@@ -74,25 +82,40 @@ select {
   width: 100%;
   padding-bottom: 10px;
 }
-.save {
-  background-color: #00d084;
+
+.save,
+.del {
   color: #fff;
   font-size: 1.5rem;
   padding: 5px 10px;
   border-radius: 5px;
   border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
+
+.save {
+  background-color: #00d084;
+}
+
 .save:hover {
   background-color: #7bdcb5;
 }
+
+.save:active {
+  background-color: #369a77;
+  /* Darker version of hover color */
+}
+
 .del {
   background-color: #ff3b30;
-  color: #fff;
-  font-size: 1.5rem;
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: none;
 }
+
 .del:hover {
   background-color: #fd7069;
+}
+
+.del:active {
+  background-color: #d3302b;
+  /* Darker version of hover color */
 }
