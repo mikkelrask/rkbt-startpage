@@ -6,11 +6,12 @@ import "../../skotland.css";
 interface CardProps {
   title: string;
   children: ReactNode;
+  width: string;
 }
 
-const Card: React.FC<CardProps> = ({ children, title }) => {
+const Card: React.FC<CardProps> = ({ children, title, width }) => {
   return (
-    <div className="card">
+    <div className="card " style={width}>
       <h2>{title}</h2>
       {children}
     </div>
