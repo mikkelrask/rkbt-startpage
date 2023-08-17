@@ -9,8 +9,9 @@ interface CardProps {
   width?: string;
 }
 const Card: React.FC<CardProps> = ({ children, title, width }) => {
+  const cardStyle: React.CSSProperties = { width: width };
   return (
-    <div className="card" style={{ width: width }}>
+    <div className="card " style={cardStyle}>
       <h2>{title}</h2>
       {children}
     </div>
