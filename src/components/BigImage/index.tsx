@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
-const themeRandomizer = () => {
-  const theme = [
+type Theme = "pastel" | "griffith" | "guts" | "sexy" | "wms" | "rack" | "rocket" | "SCM";
+
+const themeRandomizer = (): Theme => {
+  const themeOptions: Theme[] = [
     "pastel",
     "griffith",
     "guts",
@@ -11,17 +13,17 @@ const themeRandomizer = () => {
     "rocket",
     "SCM",
   ];
-  const random = theme[Math.floor(Math.random() * theme.length)];
+  const random = themeOptions[Math.floor(Math.random() * themeOptions.length)];
   return random;
 };
 
-const setTheme = (theme) => {
-  document.documentElement.className = theme as string;
+const setTheme = (theme: Theme) => {
+  document.documentElement.className = theme;
   localStorage.setItem("theme", theme);
 };
 
 const BigImage = () => {
-  const savedTheme = localStorage.getItem("theme");
+  const savedTheme = localStorage.getItem("theme") as Theme | null;
 
   useEffect(() => {
     if (savedTheme) {
@@ -33,18 +35,16 @@ const BigImage = () => {
   }, []);
 
   return (
-    <>
-      <div className="image-container">
-        <img
-          src="../../assets/Grafikforside.png"
-          alt="Click Me"
-          onClick={() => {
-            const randomTheme = themeRandomizer();
-            setTheme(randomTheme);
-          }}
-        />
-      </div>
-    </>
+    <div className="image-container">
+      <img
+        src="../../assets/Grafikforside.png"
+        alt="Click Me"
+        onClick={() => {
+          const randomTheme = themeRandomizer();
+          setTheme(randomTheme);
+        }}
+      />
+    </div>
   );
 };
 
