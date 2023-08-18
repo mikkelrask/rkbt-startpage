@@ -1,3 +1,5 @@
+import React, { useEffect } from 'react';
+
 const themeRandomizer = () => {
   const theme = [
     "pastel",
@@ -13,25 +15,33 @@ const themeRandomizer = () => {
   return random;
 };
 
-const setTheme = () => {
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme) {
-    document.documentElement.className = savedTheme;
-  }
-
-  const theme = themeRandomizer();
+const setTheme = (theme) => {
   document.documentElement.className = theme;
   localStorage.setItem("theme", theme);
 };
 
 const BigImage = () => {
+  const savedTheme = localStorage.getItem("theme");
+
+  useEffect(() => {
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      const randomTheme = themeRandomizer();
+      setTheme(randomTheme);
+    }
+  }, []);
+
   return (
     <>
       <div className="image-container">
         <img
           src="../../assets/Grafikforside.png"
           alt="Click Me"
-          onClick={setTheme}
+          onClick={() => {
+            const randomTheme = themeRandomizer();
+            setTheme(randomTheme);
+          }}
         />
       </div>
     </>
