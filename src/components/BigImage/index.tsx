@@ -16,7 +16,7 @@ const themeRandomizer = () => {
 };
 
 const setTheme = (theme) => {
-  document.documentElement.className = theme;
+  document.documentElement.className = theme as string;
   localStorage.setItem("theme", theme);
 };
 
