@@ -75,7 +75,7 @@ const AddLink: React.FC = () => {
   };
 
   return (
-    <Card title="Nyt link">
+    <Card title="Nyt link" width="32%">
       <div>
         <form onSubmit={handleFormSubmit}>
           <div>
@@ -83,6 +83,7 @@ const AddLink: React.FC = () => {
             <input
               type="text"
               id="title"
+              placeholder="eks. Spotify playliste"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -91,6 +92,7 @@ const AddLink: React.FC = () => {
             <label htmlFor="url">Adresse:</label>
             <input
               type="url"
+              placeholder="https://www..."
               id="url"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
@@ -103,9 +105,9 @@ const AddLink: React.FC = () => {
               value={selectedCategoryId?.toString()}
               onChange={handleDropdownChange}
             >
-              <option value="Kolonne:">Select</option>
+              <option value="Kolonne:">Vælg</option>
               {categories.map((category) => (
-                <option key={category.id} value={category.id}>
+                <option key={category.id} value={category.id} aria-required>
                   {category.name}
                 </option>
               ))}

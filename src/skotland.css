@@ -29,6 +29,11 @@ form {
   width: 100%;
 }
 
+tr:hover {
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
 label {
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -70,7 +75,10 @@ select:focus {
   transition: background-color 0.3s ease-in-out;
   vertical-align: middle;
 }
-
+form input::placeholder {
+  font-style: italic;
+  color: #ccc;
+}
 .card form button:hover {
   background-color: #7bdcb5;
 }
@@ -85,41 +93,4 @@ select:focus {
   color: #636363;
   width: 100%;
   padding-bottom: 10px;
-}
-
-.save,
-.del {
-  color: #fff;
-  font-size: 1.5rem;
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.save {
-  background-color: #00d084;
-}
-
-.save:hover {
-  background-color: #7bdcb5;
-}
-
-.save:active {
-  background-color: #369a77;
-  /* Darker version of hover color */
-}
-
-.del {
-  background-color: #ff3b30;
-}
-
-.del:hover {
-  background-color: #fd7069;
-}
-
-.del:active {
-  background-color: #d3302b;
-  /* Darker version of hover color */
 }

@@ -27,7 +27,7 @@ const Categories: React.FC = () => {
       try {
         const response = await fetch(categoriesApiUrl);
         if (!response.ok) {
-          throw new Error("Failed to fetch categories.");
+          throw new Error("Kunne ikke hente kategorier");
         }
         const data = (await response.json()) as Category[];
         setCategories(data);
