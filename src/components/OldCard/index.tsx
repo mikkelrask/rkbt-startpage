@@ -1,22 +1,20 @@
 // Card.tsx
 import React, { ReactNode } from "react";
-import "../../skotland.css";
 
-// pass the card title as a prop
+// make the width passable as a prop
 interface CardProps {
   title: string;
   children: ReactNode;
   width?: string;
 }
-
-const Card: React.FC<CardProps> = ({ children, title, width }) => {
+const OldCard: React.FC<CardProps> = ({ children, title, width }) => {
   const cardStyle: React.CSSProperties = { width: width };
   return (
-    <div className="card " style={cardStyle}>
+    <div className="card rounded" style={cardStyle}>
       <h2>{title}</h2>
       {children}
     </div>
   );
 };
 
-export default Card;
+export default OldCard;
