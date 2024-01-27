@@ -1,6 +1,6 @@
 import React from "react";
 import LinkRow from "../LinkRow/index.tsx";
-import Card from "../Card/index.tsx";
+import OldCard from "../OldCard/index.tsx";
 
 interface Link {
   id: number;
@@ -21,7 +21,7 @@ interface LinkTableProps {
 
 const LinkTable: React.FC<LinkTableProps> = ({ links, categories }) => {
   return (
-    <Card title="Rediger links">
+    <OldCard title="Rediger links">
       <table>
         <thead>
           <tr>
@@ -38,7 +38,7 @@ const LinkTable: React.FC<LinkTableProps> = ({ links, categories }) => {
           ))}
         </tbody>
       </table>
-    </Card>
+    </OldCard>
   );
 };
 

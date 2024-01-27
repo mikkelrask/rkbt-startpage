@@ -1,5 +1,23 @@
 import React, { useEffect, useState } from "react";
-import Card from "../Card";
+import {
+  Card,
+  CardHeader,
+  CardDescription,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectGroup,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 const categoriesUrl = "/api/categories";
 const linksUrl = "/api/links";
@@ -36,7 +54,7 @@ const AddLink: React.FC = () => {
     void fetchCategories();
   }, []);
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
     // Create a new link object based on the form data
@@ -67,58 +85,68 @@ const AddLink: React.FC = () => {
       });
   };
 
-  const handleDropdownChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const categoryId = Number(event.target.value);
+  const handleDropdownChange = (value: string | null) => {
+    const categoryId = Number(value);
     setSelectedCategoryId(categoryId);
   };
 
   return (
-    <Card title="Nyt link" width="32%">
-      <div>
-        <form onSubmit={handleFormSubmit}>
-          <div>
-            <label htmlFor="title">Navn:</label>
-            <input
-              type="text"
-              id="title"
-              placeholder="eks. Spotify playliste"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="url">Adresse:</label>
-            <input
-              type="url"
-              placeholder="https://www..."
-              id="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-            />
-          </div>
-          <div>
-            <label htmlFor="dropdown">Kategori:</label>
-            <select
-              id="dropdown"
-              value={selectedCategoryId?.toString()}
-              onChange={handleDropdownChange}
-            >
-              <option value="Kolonne:">Vælg</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id} aria-required>
-                  {category.name}
-                </option>
-              ))}
-            </select>
-            <button type="submit" placeholder="Kolonne" value="kolonne">
-              Tilføj
-            </button>
-          </div>
-        </form>
-      </div>
-    </Card>
+    <form onSubmit={handleFormSubmit}>
+      <Card>
+        <CardHeader>
+          <CardTitle>Tilføj link</CardTitle>
+          <CardDescription>
+            Indtast link titel, url og vælg kategori herunder
+          </CardDescription>
+          <Label htmlFor="title">Titel:</Label>
+          <Input
+            type="text"
+            placeholder='eks. "RKBT Radio - Spotify Playlist"'
+            id="title"
+            name="title"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+          <Label htmlFor="url">Link:</Label>
+          <Input
+            type="url"
+            placeholder='URL inkl. "https://" - eks. "https://open.spotify.com"'
+            id="url"
+            name="url"
+            value={url}
+            onChange={(e) => {
+              setUrl(e.target.value);
+            }}
+          />
+          <Label htmlFor="category_id">Kategori:</Label>
+          <Select
+            id="category_id"
+            name="category_id"
+            value={selectedCategoryId}
+            onValueChange={handleDropdownChange}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Vælg herunder"></SelectValue>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Link kategori</SelectLabel>
+                {categories.map((category) => (
+                  <SelectItem key={category.id} value={category.id}>
+                    {category.name}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <CardFooter>
+            <Button type="submit">Tilføj</Button>
+          </CardFooter>
+        </CardHeader>
+      </Card>
+    </form>
   );
 };
 
