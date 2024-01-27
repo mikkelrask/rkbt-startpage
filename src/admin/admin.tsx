@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import AddLink from "@/components/AddLink";
-import LinkTable from "@/components/LinkTable";
 // import App.css from src/app.css
 import "/App.css";
+import { DataTable } from "@/components/DataTable";
 
 interface Link {
   id: number;
@@ -35,8 +35,9 @@ const App: React.FC = () => {
           throw new Error("Failed to fetch data.");
         }
 
-        const linksData: Link[] = await linksResponse.json();
-        const categoriesData: Category[] = await categoriesResponse.json();
+        const linksData: Link[] = (await linksResponse.json()) as Link[];
+        const categoriesData: Category[] =
+          (await categoriesResponse.json()) as Category[];
 
         setLinks(linksData);
         setCategories(categoriesData);
@@ -49,9 +50,9 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <AddLink />
-      <LinkTable links={links} categories={categories} />
+      <DataTable links={links} categories={categories} />
     </div>
   );
 };

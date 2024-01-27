@@ -92,7 +92,7 @@ const AddLink: React.FC = () => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <Card>
+      <Card className="m-4 p-2">
         <CardHeader>
           <CardTitle>Tilføj link</CardTitle>
           <CardDescription>
