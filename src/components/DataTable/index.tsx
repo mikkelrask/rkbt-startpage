@@ -1,3 +1,4 @@
+import { truncateUrl } from "../../utils/truncate";
 import {
   Table,
   TableBody,
@@ -8,13 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
-
-function truncateUrl(url: string, maxSlashes: number) {
-  const parts = url.split("/");
-  return parts.length > maxSlashes + 1
-    ? parts.slice(0, maxSlashes + 1).join("/") + "/..."
-    : url;
-}
+import { Button } from "@/components/ui/button";
 
 interface Link {
   id: number;
@@ -66,22 +61,22 @@ const DataTable: React.FC<Props> = ({ links, categories }) => {
                       {truncateUrl(link.url, 3)}
                     </TableCell>
                     <TableCell className="w-[20vw] text-right">
-                      <button
-                        className="text-blue-500 hover:text-blue-700"
-                        onClick={() => {
-                          console.log("Edit link", link.id);
-                        }}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="text-red-500 hover:text-red-700"
-                        onClick={() => {
-                          console.log("Delete link", link.id);
-                        }}
-                      >
-                        Delete
-                      </button>
+                      <Button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                          />
+                        </svg>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
