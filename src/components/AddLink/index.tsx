@@ -18,6 +18,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { handleDropdownChange } from "@/utils/handleDropdownChange";
+import { newLink } from "@/utils/apis";
 
 const categoriesUrl = "/api/categories";
 const linksUrl = "/api/links";
@@ -54,41 +56,45 @@ const AddLink: React.FC = () => {
     void fetchCategories();
   }, []);
 
-  const handleFormSubmit = (event: React.FormEvent) => {
+  const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    try {
+      return await newLink(title, url, selectedCategoryId as number);
+    } catch (error) {
+      console.error(error);
+    }
+    // // Create a new link object based on the form data
+    // const newLink = {
+    //   title: title,
+    //   url: url,
+    //   category_id: selectedCategoryId,
+    // };
 
-    // Create a new link object based on the form data
-    const newLink = {
-      title: title,
-      url: url,
-      category_id: selectedCategoryId,
-    };
-
-    // Send the new link data to the API endpoint
-    fetch(`${baseUrl}${linksUrl}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newLink),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add link.");
-        }
-        console.log("Link added successfully!");
-
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    // // Send the new link data to the API endpoint
+    // fetch(`${baseUrl}${linksUrl}`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(newLink),
+    // })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw new Error("Failed to add link.");
+    //     }
+    //     console.log("Link added successfully!");
+    //     // make toast
+    //     toast({
+    //       title: "Link tilføjet",
+    //       description: "Linket er nu tilføjet til databasen.",
+    //     });
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
   };
-
-  const handleDropdownChange = (value: string | null) => {
-    const categoryId = Number(value);
-    setSelectedCategoryId(categoryId);
-  };
+  const onDropdownChange = (value: string | null) =>
+    handleDropdownChange(value, setSelectedCategoryId);
 
   return (
     <form onSubmit={handleFormSubmit}>
@@ -125,7 +131,7 @@ const AddLink: React.FC = () => {
             id="category_id"
             name="category_id"
             value={selectedCategoryId}
-            onValueChange={handleDropdownChange}
+            onValueChange={onDropdownChange}
           >
             <SelectTrigger>
               <SelectValue placeholder="Vælg herunder"></SelectValue>
